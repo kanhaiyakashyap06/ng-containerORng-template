@@ -1,0 +1,31 @@
+<h2 class="text-center">Implementation of Ng-container and Ng-template</h2>
+<!---ng-template     -->
+<ng-template [ngIf]="list?.length" [ngIfElse]="emptyList">
+  <ul class="list-group container"  style="margin-top:10px;">
+    <ng-template ngFor let-item [ngForOf]="list">
+      <li class="list-group-item">{{item?.name}}</li>
+    </ng-template>
+  </ul>
+</ng-template>
+
+<ng-template #emptyList>
+  <div class="card container text-center">Sorry, The list is empty</div>
+</ng-template>
+<br>
+<!---ng-container-->
+<ng-container *ngIf="list.length else emptyList">
+  <ng-container *ngTemplateOutlet="itemList">
+  </ng-container>
+</ng-container>
+
+<ng-template #itemList>
+  <ul class="list-group container">
+    <ng-template ngFor let-item [ngForOf]="list">
+      <li class="list-group-item">{{item.name}}</li>
+    </ng-template>
+  </ul>
+</ng-template>
+
+<ng-template #emptyList>
+  <div  class="card container text-center">Sorry, The list is empty</div>
+</ng-template>
